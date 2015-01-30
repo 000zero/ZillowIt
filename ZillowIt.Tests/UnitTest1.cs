@@ -32,22 +32,7 @@ namespace ZillowIt.Tests
              catch (Exception ex)
             {
 
-             }
-
-            var ser1 = new XmlSerializer(typeof(searchresults));
-
-            try
-            {
-                using (var rdr = new System.IO.StringReader(xml))
-                {
-                    var result = (searchresults)ser1.Deserialize(rdr);
-                }
             }
-            catch (Exception ex)
-            {
-
-            }
-
         }
     }
 }
