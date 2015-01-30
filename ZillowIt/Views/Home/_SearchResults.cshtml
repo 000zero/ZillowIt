@@ -1,6 +1,7 @@
 ﻿@model ZillowIt.Models.ZillowResults
 @using ZillowIt.Models
 
+<!-- Verify there are results to process before rendering -->
 @if (Model.Response != null && Model.Response.Results.Any())
 {
     var counter = 1;
@@ -19,12 +20,10 @@
                             Coordinates: @item.Address.Latitude, @item.Address.Longitude
                         </address>
 
-                        <div class="bottom">
-                            <a href="@item.Links.HomeDetails">Details</a> |
-                            <a href="@item.Links.GraphsAndData">Graphs</a> |
-                            <a href="@item.Links.MapThisHome">Map</a> |
-                            <a href="@item.Links.Comparables">Comparables</a>
-                        </div>
+                        <a href="@item.Links.HomeDetails">Details</a> |
+                        <a href="@item.Links.GraphsAndData">Graphs</a> |
+                        <a href="@item.Links.MapThisHome">Map</a> |
+                        <a href="@item.Links.Comparables">Comparables</a>
                     </div>
                 </div>
             </div>
@@ -68,7 +67,7 @@
         counter++;
     }
 }
-else if (Model.Message != null)
+else if (Model.Message != null) // display any error message details
 {
     <div class="alert alert-warning" role="alert">
         Error Code: @Model.Message.Code<br />

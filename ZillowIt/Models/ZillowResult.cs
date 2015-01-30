@@ -7,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace ZillowIt.Models
 {
+    /// <summary>
+    /// Zillow API Results
+    /// </summary>
     [XmlRoot(ElementName = "searchresults", Namespace = "http://www.zillow.com/static/xsd/SearchResults.xsd")]
     public class ZillowResults
     {
@@ -40,7 +43,9 @@ namespace ZillowIt.Models
         public int Code { get; set; }
     }
 
-    //[XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.zillow.com/static/xsd/SearchResults.xsd")]
+    /// <summary>
+    /// Zillow Response contains the collection of results
+    /// </summary>
     public class ZillowResponse
     {
         [XmlArray("results", Form = XmlSchemaForm.Unqualified)]
@@ -48,6 +53,9 @@ namespace ZillowIt.Models
         public ZillowResult[] Results { get; set; }
     }
 
+    /// <summary>
+    /// Represents and individual Zillow result
+    /// </summary>
     public class ZillowResult
     {
         [XmlElement(ElementName = "zpid", Form = XmlSchemaForm.Unqualified)]
