@@ -1,0 +1,81 @@
+﻿@model ZillowIt.Models.ZillowResults
+@using ZillowIt.Models
+
+@if (Model.Response != null && Model.Response.Results.Any())
+{
+    var counter = 1;
+    foreach (var item in Model.Response.Results)
+    {
+        <div class="row @(counter % 2 == 0 ? "" : "row-highlighted")">
+            <!-- Location information -->
+            <div class="col-lg-4 col-md-4 set-height pad-bottom">
+                <div class="panel panel-default max-height">
+                    <div class="panel-heading">Location</div>
+                    <div class="panel-body">
+                        <address>
+                            <strong>Zillow ID: @item.ZillowId</strong><br />
+                            @item.Address.Street<br />
+                            @item.Address.City, @item.Address.State, @item.Address.ZipCode<br />
+                            Coordinates: @item.Address.Latitude, @item.Address.Longitude
+                        </address>
+
+                        <div class="bottom">
+                            <a href="@item.Links.HomeDetails">Details</a> |
+                            <a href="@item.Links.GraphsAndData">Graphs</a> |
+                            <a href="@item.Links.MapThisHome">Map</a> |
+                            <a href="@item.Links.Comparables">Comparables</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Zillow Estimate information -->
+            <div class="col-lg-4 col-md-4 set-height pad-bottom">
+                <div class="panel panel-default max-height">
+                    <div class="panel-heading">Zillow Estimate</div>
+                    <div class="panel-body">
+                        Amount: @item.Estimate.Amount.ToString("c")<br />
+                        Last Update: @item.Estimate.LastUpdate<br />
+                        Value Change: @item.Estimate.ValueChange.Value.ToString("c")<br />
+                        Value Change Currency: @item.Estimate.ValueChange.Currency<br />
+                        Value Change Duration: @item.Estimate.ValueChange.Duration<br />
+                        Valuation Range: @item.Estimate.ValuationRange.Low.Value.ToString("c") - @item.Estimate.ValuationRange.High.Value.ToString("c")<br />
+                        Valuation Range Currency: @item.Estimate.ValuationRange.Low.Currency<br />
+                        Percentile: @item.Estimate.Percentile
+                    </div>
+                </div>
+            </div>
+            <!-- Zillow local realestate information -->
+            @foreach (var region in @item.LocalRealEstate)
+            {
+                <div class="col-lg-4 col-md-4 set-height pad-bottom">
+                    <div class="panel panel-default max-height">
+                        <div class="panel-heading">Region - @region.Name</div>
+                        <div class="panel-body">
+                            Region ID: @region.Id<br />
+                            Region Type: @region.Type<br />
+                            Z Index Value: @region.ZIndexValue<br />
+                            Z Index One Year Change: @region.ZIndexOneYearChange<br />
+                            <br />
+                            <a href="@region.Links.Overview">Overview</a> |
+                            <a href="@region.Links.ForSaleByOwner">Sale By Owner</a> |
+                            <a href="@region.Links.ForSale">Sale</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    
+        counter++;
+    }
+}
+else if (Model.Message != null)
+{
+    <div class="alert alert-warning" role="alert">
+        Error Code: @Model.Message.Code<br />
+        Message: @Model.Message.Text
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">No Results Found!</div>
+}

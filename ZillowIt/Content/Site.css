@@ -1,0 +1,28 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.pad-bottom {
+    margin-bottom: 10px;
+}
+
+.pad-top {
+    margin-top: 10px;
+}
+
+.set-height {
+    height: 250px;
+}
+
+.max-height {
+    height: 100%;
+}
+
+.row-highlighted {
+    padding-top: 10px;
+    border: solid #46b8da;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
